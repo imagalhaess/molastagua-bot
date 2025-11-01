@@ -96,12 +96,18 @@ cp .env.example .env
 Edite o arquivo `.env` com suas configurações:
 
 ```env
-COMPANY_NAME=Molas Tágua
+COMPANY_NAME=MolasTag
 COMPANY_ADDRESS=Sua Rua, 123 - Bairro - Cidade/UF
 PAYMENT_METHODS=Dinheiro, PIX, Cartão de Crédito/Débito
-BUSINESS_HOURS_START=08:00
-BUSINESS_HOURS_END=18:00
-BUSINESS_DAYS=1,2,3,4,5,6
+
+# Segunda a Sexta: 08:00 - 17:00
+WEEKDAY_START=08:00
+WEEKDAY_END=17:00
+
+# Sábado: 08:00 - 12:00
+SATURDAY_START=08:00
+SATURDAY_END=12:00
+
 BUDGET_RESPONSE_TIME=45
 HUMAN_SUPPORT_NUMBER=5511999999999
 NODE_ENV=development

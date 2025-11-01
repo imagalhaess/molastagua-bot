@@ -5,7 +5,7 @@
 
 const { config } = require('../config/environment');
 const { bold, formatMenu, separator } = require('../utils/messageFormatter');
-const { getNextBusinessTime } = require('../utils/timeValidator');
+const { getNextBusinessTime, getBusinessHoursDescription } = require('../utils/timeValidator');
 
 const messages = {
   /**
@@ -29,7 +29,7 @@ ${config.company.paymentMethods}`;
     return `No momento estamos fora do horário de atendimento.
 
 ${bold('Horário de funcionamento:')}
-${config.businessHours.start} às ${config.businessHours.end}
+${getBusinessHoursDescription()}
 
 Retornaremos seu contato em ${bold(getNextBusinessTime())}.
 

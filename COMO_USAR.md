@@ -13,12 +13,13 @@ COMPANY_ADDRESS=Sua Rua Real, 123 - Bairro - Cidade/UF
 PAYMENT_METHODS=Dinheiro, PIX, Cartão de Crédito/Débito, Boleto
 
 # Horário de Atendimento (formato 24h)
-BUSINESS_HOURS_START=08:00
-BUSINESS_HOURS_END=18:00
+# Segunda a Sexta: 08:00 - 17:00
+WEEKDAY_START=08:00
+WEEKDAY_END=17:00
 
-# Dias da semana (0=Domingo, 1=Segunda, ..., 6=Sábado)
-# Exemplo: 1,2,3,4,5,6 = Segunda a Sábado
-BUSINESS_DAYS=1,2,3,4,5,6
+# Sábado: 08:00 - 12:00
+SATURDAY_START=08:00
+SATURDAY_END=12:00
 
 # Tempo de resposta para orçamentos (em minutos)
 BUDGET_RESPONSE_TIME=45
@@ -168,9 +169,13 @@ Siga o guia em: `GUIA_APRENDIZADO.md` seção "Como Expandir o Projeto"
 Edite o arquivo: `.env`
 
 ```env
-BUSINESS_HOURS_START=09:00
-BUSINESS_HOURS_END=19:00
-BUSINESS_DAYS=1,2,3,4,5  # Segunda a Sexta
+# Segunda a Sexta
+WEEKDAY_START=09:00
+WEEKDAY_END=19:00
+
+# Sábado
+SATURDAY_START=09:00
+SATURDAY_END=13:00
 ```
 
 ---

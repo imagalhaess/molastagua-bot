@@ -12,6 +12,7 @@ const cron = require('node-cron');
 const { config, validateEnv } = require('./src/config/environment');
 const MessageRouter = require('./src/middlewares/messageRouter');
 const ConversationContext = require('./src/services/conversationContext');
+const { getBusinessHoursDescription } = require('./src/utils/timeValidator');
 
 // Valida variáveis de ambiente
 try {
@@ -65,7 +66,8 @@ client.on('ready', () => {
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('Bot inicializado com sucesso!');
   console.log(`Empresa: ${config.company.name}`);
-  console.log(`Horário: ${config.businessHours.start} às ${config.businessHours.end}`);
+  console.log('Horário de funcionamento:');
+  console.log(`  ${getBusinessHoursDescription().replace('\n', '\n  ')}`);
   console.log(`Ambiente: ${config.nodeEnv}`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
   console.log('Aguardando mensagens...\n');

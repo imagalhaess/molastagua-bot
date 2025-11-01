@@ -10,9 +10,10 @@ const validateEnv = () => {
     'COMPANY_NAME',
     'COMPANY_ADDRESS',
     'PAYMENT_METHODS',
-    'BUSINESS_HOURS_START',
-    'BUSINESS_HOURS_END',
-    'BUSINESS_DAYS'
+    'WEEKDAY_START',
+    'WEEKDAY_END',
+    'SATURDAY_START',
+    'SATURDAY_END'
   ];
 
   const missing = requiredVars.filter(varName => !process.env[varName]);
@@ -29,11 +30,16 @@ const config = {
     paymentMethods: process.env.PAYMENT_METHODS || ''
   },
   businessHours: {
-    start: process.env.BUSINESS_HOURS_START || '08:00',
-    end: process.env.BUSINESS_HOURS_END || '18:00',
-    days: process.env.BUSINESS_DAYS
-      ? process.env.BUSINESS_DAYS.split(',').map(Number)
-      : [1, 2, 3, 4, 5, 6] // Segunda a Sábado
+    weekday: {
+      start: process.env.WEEKDAY_START || '08:00',
+      end: process.env.WEEKDAY_END || '17:00',
+      days: [1, 2, 3, 4, 5] // Segunda a Sexta
+    },
+    saturday: {
+      start: process.env.SATURDAY_START || '08:00',
+      end: process.env.SATURDAY_END || '12:00',
+      day: 6 // Sábado
+    }
   },
   budgetResponseTime: parseInt(process.env.BUDGET_RESPONSE_TIME || '45', 10),
   humanSupportNumber: process.env.HUMAN_SUPPORT_NUMBER || '',
