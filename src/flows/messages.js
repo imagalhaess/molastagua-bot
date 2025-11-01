@@ -70,12 +70,12 @@ ${formatMenu([
   },
 
   /**
-   * Submenu de molas
+   * Submenu de molas - escolha do tipo
    */
   springsMenu: () => {
     return `${bold('SERVIÇO DE MOLAS')}
 
-Selecione a opção desejada:
+O que você precisa?
 
 ${formatMenu([
       { key: '1', label: 'Troca de mola' },
@@ -133,6 +133,14 @@ ${formatMenu([
    * Solicitações de informações
    */
   requests: {
+    vehicleModel: () => `Por favor, informe o ${bold('modelo do veículo')}:
+
+Exemplo: Fiat Uno, VW Gol, Chevrolet Onix, etc.`,
+
+    vehicleYear: () => `Qual o ${bold('ano do veículo')}?
+
+Exemplo: 2015, 2020, etc.`,
+
     partName: () => 'Por favor, informe o ${bold("nome da peça")}:',
 
     location: () => `Informe a ${bold('localização')} da peça:

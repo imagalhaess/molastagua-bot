@@ -12,6 +12,7 @@ const ServicesHandler = require('../handlers/servicesHandler');
 const DataCollectionHandler = require('../handlers/dataCollectionHandler');
 const SalesHandler = require('../handlers/salesHandler');
 const FinancialHandler = require('../handlers/financialHandler');
+const VehicleDataHandler = require('../handlers/vehicleDataHandler');
 
 class MessageRouter {
   /**
@@ -40,6 +41,25 @@ class MessageRouter {
         await this.handleMainMenu(client, message, chatId);
         break;
 
+      // Coleta de dados do veículo
+      case CONVERSATION_STATES.COLLECTING_VEHICLE_MODEL:
+        await VehicleDataHandler.collectVehicleModel(client, message, chatId);
+        break;
+
+      case CONVERSATION_STATES.COLLECTING_VEHICLE_YEAR:
+        await VehicleDataHandler.collectVehicleYear(client, message, chatId);
+        break;
+
+      // Coleta de dados do veículo para vendas
+      case CONVERSATION_STATES.SALES_COLLECTING_VEHICLE_MODEL:
+        await VehicleDataHandler.collectVehicleModel(client, message, chatId);
+        break;
+
+      case CONVERSATION_STATES.SALES_COLLECTING_VEHICLE_YEAR:
+        await VehicleDataHandler.collectVehicleYear(client, message, chatId);
+        break;
+
+      // Menus de serviços
       case CONVERSATION_STATES.SERVICES_MENU:
         await ServicesHandler.handleServicesMenu(client, message, chatId);
         break;
@@ -60,6 +80,7 @@ class MessageRouter {
         await ServicesHandler.handleTieRodSubmenu(client, message, chatId);
         break;
 
+      // Coleta de dados específicos
       case CONVERSATION_STATES.COLLECTING_PART_NAME:
         await DataCollectionHandler.collectPartName(client, message, chatId);
         break;
@@ -133,13 +154,13 @@ class MessageRouter {
 
     switch (option) {
       case MENU_OPTIONS.MAIN.SERVICES:
-        ConversationContext.setState(chatId, CONVERSATION_STATES.SERVICES_MENU);
-        await client.sendMessage(chatId, messages.servicesMenu());
+        // Inicia coleta de dados do veículo para serviços
+        await VehicleDataHandler.startServicesVehicleCollection(client, chatId);
         break;
 
       case MENU_OPTIONS.MAIN.SALES:
-        ConversationContext.setState(chatId, CONVERSATION_STATES.SALES);
-        await SalesHandler.handleSales(client, chatId);
+        // Inicia coleta de dados do veículo para vendas
+        await VehicleDataHandler.startSalesVehicleCollection(client, chatId);
         break;
 
       case MENU_OPTIONS.MAIN.FINANCIAL:

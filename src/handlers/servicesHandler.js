@@ -67,7 +67,7 @@ class ServicesHandler {
   }
 
   /**
-   * Processa submenu de molas
+   * Processa submenu de molas - escolha do tipo (troca ou arquear)
    */
   static async handleSpringsSubmenu(client, message, chatId) {
     const option = message.body.trim();
@@ -79,10 +79,14 @@ class ServicesHandler {
     }
 
     let serviceType = '';
-    if (option === MENU_OPTIONS.SERVICE_DETAILS.SPRINGS.EXCHANGE) {
+    let needsDetails = false;
+
+    if (option === MENU_OPTIONS.SERVICE_DETAILS.SPRINGS_TYPE.EXCHANGE) {
       serviceType = 'Troca de mola';
-    } else if (option === MENU_OPTIONS.SERVICE_DETAILS.SPRINGS.ARCH) {
+      needsDetails = true; // Troca precisa de detalhes
+    } else if (option === MENU_OPTIONS.SERVICE_DETAILS.SPRINGS_TYPE.ARCH) {
       serviceType = 'Arquear mola';
+      needsDetails = false; // Arquear não precisa de detalhes
     } else {
       await client.sendMessage(chatId, messages.errors.invalidOption());
       await client.sendMessage(chatId, messages.springsMenu());
@@ -90,8 +94,30 @@ class ServicesHandler {
     }
 
     ConversationContext.setData(chatId, 'serviceType', serviceType);
-    ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
-    await client.sendMessage(chatId, messages.requests.partName());
+
+    if (needsDetails) {
+      // Troca: coleta detalhes
+      ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
+      await client.sendMessage(chatId, messages.requests.partName());
+    } else {
+      // Arquear: finaliza direto
+      await this.finalizeBudgetWithoutDetails(client, chatId);
+    }
+  }
+
+  /**
+   * Finaliza orçamento sem coletar detalhes adicionais
+   */
+  static async finalizeBudgetWithoutDetails(client, chatId) {
+    const allData = ConversationContext.getAllData(chatId);
+    const serviceType = allData.serviceType || 'Serviço';
+
+    await client.sendMessage(chatId, messages.confirmations.budgetReceived());
+
+    await NotificationService.notifyHumanSupport(client, chatId, serviceType);
+    NotificationService.logAction(chatId, `Budget request completed: ${serviceType}`);
+
+    ConversationContext.setState(chatId, CONVERSATION_STATES.WAITING_HUMAN);
   }
 
   /**
