@@ -1,0 +1,78 @@
+inicio do chat, mensagem de boas vindas, apresentação: somos [nome], oferecemos serviços diversos de mecânica,
+estamos no [endereço] e aceitamos as seguintes formas de pagamento [lista].
+[faz verificação do horário
+e dia da mensagem], SE dentro [período atendimento], continua com mensagem e opções
+SE NÃO continua com mensagem dizendo que está fora do horário de funcionamento
+e sugere contato em [próxima data/hora de funcionamento]
+
+
+
+mensagem: como podemos te ajudar? selecione uma opção:
+serviços, vendas, financeiro, falar com atendente
+
+
+
+clicou em [serviços] (botão)
+abre opções:
+
+orçamentos:
+reforçar seu veículo -> 
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+molas -> troca/arquear -> pede pro cliente descrever:
+nome da peça:
+local (dianteiro/traseiro)(lado esquerdo/lado direito):
+quantidade:
+foto:
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+suporte -> troca/recuperação -> pede pro cliente descrever:
+nome da peça:
+local (dianteiro/traseiro)(lado esquerdo/lado direito):
+quantidade:
+foto:
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+balança -> troca/recuperação -> pede pro cliente descrever:
+nome da peça:
+quantidade:
+foto:
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado) 
+
+tirante -> troca de bucha/troca de tirante -> pede pro cliente descrever:
+nome da peça:
+tipo -> fixo/regulagem
+tamanho:
+quantidade: 
+foto:
+
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+outros -> mensagem: não encontrou o que procurava, descreva o que precisa e entraremos em contato:
+responder que será enviado o orçamento neste contato em até 45min.
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+
+vendas:
+
+nome da peça: pede pro cliente descrever:
+local (dianteiro/traseiro)(lado esquerdo/lado direito):
+quantidade:
+foto:
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+
+financeiro:
+segunda via de boleto/segunda via de NF
+(notificar e encaminhar para atendimento humano com contexto coletado)
+
+
+- integrar sistema com banco de dados em nuvem para armazenar temporariamente os conteúdos 
+das mensagens para contexto ao encaminhar o atendimento para um humano;
+- sistema de notificação;
+- tom e linguagem do bot deve ser gentil, técnico, educado e direto.

@@ -1,0 +1,88 @@
+/**
+ * Constantes do sistema
+ * Centraliza valores fixos utilizados em toda aplicação
+ */
+
+const MENU_OPTIONS = {
+  MAIN: {
+    SERVICES: '1',
+    SALES: '2',
+    FINANCIAL: '3',
+    HUMAN_SUPPORT: '4'
+  },
+  SERVICES: {
+    BUDGET: '1',
+    SPRINGS: '2',
+    SUPPORT: '3',
+    BALANCE: '4',
+    TIE_ROD: '5',
+    OTHER: '6',
+    BACK: '0'
+  },
+  SERVICE_DETAILS: {
+    SPRINGS: {
+      EXCHANGE: '1',
+      ARCH: '2',
+      BACK: '0'
+    },
+    SUPPORT: {
+      EXCHANGE: '1',
+      RECOVERY: '2',
+      BACK: '0'
+    },
+    BALANCE: {
+      EXCHANGE: '1',
+      RECOVERY: '2',
+      BACK: '0'
+    },
+    TIE_ROD: {
+      BUSHING_EXCHANGE: '1',
+      FULL_EXCHANGE: '2',
+      BACK: '0'
+    }
+  },
+  TIE_ROD_TYPE: {
+    FIXED: '1',
+    ADJUSTABLE: '2'
+  }
+};
+
+const CONVERSATION_STATES = {
+  INITIAL: 'INITIAL',
+  MAIN_MENU: 'MAIN_MENU',
+  SERVICES_MENU: 'SERVICES_MENU',
+  SERVICES_BUDGET: 'SERVICES_BUDGET',
+  SERVICES_SPRINGS: 'SERVICES_SPRINGS',
+  SERVICES_SUPPORT: 'SERVICES_SUPPORT',
+  SERVICES_BALANCE: 'SERVICES_BALANCE',
+  SERVICES_TIE_ROD: 'SERVICES_TIE_ROD',
+  SALES: 'SALES',
+  FINANCIAL: 'FINANCIAL',
+  COLLECTING_PART_NAME: 'COLLECTING_PART_NAME',
+  COLLECTING_LOCATION: 'COLLECTING_LOCATION',
+  COLLECTING_QUANTITY: 'COLLECTING_QUANTITY',
+  COLLECTING_PHOTO: 'COLLECTING_PHOTO',
+  COLLECTING_TIE_ROD_TYPE: 'COLLECTING_TIE_ROD_TYPE',
+  COLLECTING_SIZE: 'COLLECTING_SIZE',
+  COLLECTING_DESCRIPTION: 'COLLECTING_DESCRIPTION',
+  WAITING_HUMAN: 'WAITING_HUMAN'
+};
+
+const LOCATIONS = {
+  FRONT: 'dianteiro',
+  REAR: 'traseiro',
+  LEFT: 'esquerdo',
+  RIGHT: 'direito'
+};
+
+const MESSAGES = {
+  TONE: 'gentil, técnico, educado e direto',
+  BUDGET_RESPONSE_TIME: 45 // minutos
+};
+
+module.exports = {
+  MENU_OPTIONS,
+  CONVERSATION_STATES,
+  LOCATIONS,
+  MESSAGES
+};

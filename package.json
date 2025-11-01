@@ -1,0 +1,22 @@
+{
+  "name": "molastagua-bot",
+  "version": "1.0.0",
+  "description": "Chatbot de atendimento automatizado via WhatsApp para oficina mecânica",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "whatsapp",
+    "chatbot",
+    "automation",
+    "customer-service"
+  ],
+  "author": "Molas Tágua",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
