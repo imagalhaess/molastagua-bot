@@ -1,6 +1,6 @@
-# 🤖 Molas Tágua Bot
+# 🤖 MolasTag Bot
 
-Chatbot de atendimento automatizado via WhatsApp para oficina mecânica, desenvolvido com Node.js seguindo princípios de Clean Code e arquitetura modular.
+Chatbot de atendimento automatizado via WhatsApp para oficina Molas Taguatinga, desenvolvido com Node.js seguindo princípios de Clean Code e arquitetura modular.
 
 ## 📋 Sobre o Projeto
 
