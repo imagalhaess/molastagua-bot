@@ -1,24 +1,24 @@
-# 📚 Guia de Aprendizado - Molas Tágua Bot
+# Guia de Aprendizado - MolasTag Bot
 
 Este documento foi criado para ajudá-lo a **aprender** com este projeto. Vamos explorar os conceitos, padrões e melhores práticas aplicadas.
 
 ---
 
-## 🎯 Objetivos de Aprendizado
+## Objetivos de Aprendizado
 
 Após estudar este projeto, você será capaz de:
 
-1. ✅ Estruturar projetos Node.js de forma profissional
-2. ✅ Aplicar princípios de Clean Code
-3. ✅ Implementar arquitetura modular
-4. ✅ Gerenciar estado de aplicação
-5. ✅ Trabalhar com APIs externas (WhatsApp)
-6. ✅ Usar variáveis de ambiente de forma segura
-7. ✅ Documentar código profissionalmente
+1. Estruturar projetos Node.js de forma profissional
+2. Aplicar princípios de Clean Code
+3. Implementar arquitetura modular
+4. Gerenciar estado de aplicação
+5. Trabalhar com APIs externas (WhatsApp)
+6. Usar variáveis de ambiente de forma segura
+7. Documentar código profissionalmente
 
 ---
 
-## 🏗️ Arquitetura Explicada
+##  Arquitetura Explicada
 
 ### Por que essa estrutura?
 
@@ -43,7 +43,7 @@ Cada pasta tem uma responsabilidade clara:
 
 ---
 
-## 📖 Conceitos Importantes
+##  Conceitos Importantes
 
 ### 1. Clean Code
 
@@ -216,7 +216,7 @@ async function myFunction() {
 
 ---
 
-## 🔍 Fluxo de Execução Passo a Passo
+##  Fluxo de Execução Passo a Passo
 
 Vamos seguir uma mensagem do início ao fim:
 
@@ -313,7 +313,7 @@ Processo recomeça, mas agora o estado é **MAIN_MENU**, então o router direcio
 
 ---
 
-## 🛠️ Como Expandir o Projeto
+##  Como Expandir o Projeto
 
 ### Adicionar novo serviço "Alinhamento"
 
@@ -379,7 +379,7 @@ case MENU_OPTIONS.SERVICES.ALIGNMENT:
 
 ---
 
-## 🐛 Como Debugar
+##  Como Debugar
 
 ### 1. Adicione logs estratégicos
 ```javascript
@@ -408,7 +408,7 @@ const result = await ServicesHandler.handleServicesMenu(
 
 ---
 
-## ✅ Checklist de Boas Práticas
+##  Checklist de Boas Práticas
 
 Ao adicionar código novo, pergunte-se:
 
@@ -422,7 +422,7 @@ Ao adicionar código novo, pergunte-se:
 
 ---
 
-## 🎓 Exercícios Práticos
+##  Exercícios Práticos
 
 ### Nível 1: Básico
 1. Mude a mensagem de boas-vindas
@@ -461,7 +461,7 @@ Ao adicionar código novo, pergunte-se:
 
 ---
 
-## 💡 Dicas Finais
+##  Dicas Finais
 
 1. **Leia o código devagar**: Não tenha pressa, entenda cada linha
 2. **Modifique e teste**: Aprende-se fazendo, não só lendo

@@ -1,6 +1,6 @@
-# 🚀 Como Usar o Molas Tágua Bot
+#  Como Usar o MolasTag Bot
 
-## ⚙️ Configuração Inicial
+##  Configuração Inicial
 
 ### 1. Edite o arquivo `.env`
 
@@ -8,7 +8,7 @@ Abra o arquivo `.env` e configure com os dados reais da sua empresa:
 
 ```bash
 # Configurações da Oficina
-COMPANY_NAME=Molas Tágua
+COMPANY_NAME=MolasTag
 COMPANY_ADDRESS=Sua Rua Real, 123 - Bairro - Cidade/UF
 PAYMENT_METHODS=Dinheiro, PIX, Cartão de Crédito/Débito, Boleto
 
@@ -55,7 +55,7 @@ npm start
 
 ---
 
-## 📱 Como Funciona
+##  Como Funciona
 
 ### Para Clientes
 
@@ -78,7 +78,7 @@ npm start
 
 ---
 
-## 🎯 Fluxos Disponíveis
+##  Fluxos Disponíveis
 
 ### 1️⃣ Serviços
 
@@ -113,7 +113,7 @@ Opções disponíveis:
 
 ---
 
-## 🔔 Sistema de Notificações
+##  Sistema de Notificações
 
 Quando um cliente solicita algo, o bot:
 
@@ -144,7 +144,7 @@ Informações coletadas:
 
 ---
 
-## 🛠️ Personalização
+##  Personalização
 
 ### Alterar Mensagens
 
@@ -223,7 +223,7 @@ npm start
 
 ---
 
-## 📊 Monitoramento
+##  Monitoramento
 
 ### Logs
 
@@ -246,7 +246,7 @@ O bot exibe logs no console:
 
 ---
 
-## 🔒 Segurança
+##  Segurança
 
 ### Dados Sensíveis
 
@@ -297,7 +297,7 @@ docker run -d --name bot molastagua-bot
 
 ---
 
-## 📈 Melhorias Futuras
+##  Melhorias Futuras
 
 ### Banco de Dados
 
@@ -344,7 +344,7 @@ npm install openai
 
 ---
 
-## 📞 Suporte
+##  Suporte
 
 - **GitHub Issues:** https://github.com/imagalhaess/molastagua-bot/issues
 - **Documentação:** `README.md`
@@ -352,7 +352,7 @@ npm install openai
 
 ---
 
-## ✅ Checklist de Produção
+##  Checklist de Produção
 
 Antes de colocar em produção:
 
