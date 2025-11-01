@@ -12,13 +12,13 @@ const messages = {
    * Mensagem de boas-vindas
    */
   welcome: () => {
-    return `Olá! Seja bem-vindo(a) à ${bold(config.company.name)}! 👋
+    return `Olá! Seja bem-vindo(a) à ${bold(config.company.name)}!
 
 Somos especializados em serviços de mecânica automotiva, oferecendo soluções completas para seu veículo.
 
-📍 ${bold('Localização:')} ${config.company.address}
+${bold('Localização:')} ${config.company.address}
 
-💳 ${bold('Formas de pagamento:')}
+${bold('Formas de pagamento:')}
 ${config.company.paymentMethods}`;
   },
 
@@ -26,14 +26,14 @@ ${config.company.paymentMethods}`;
    * Mensagem quando fora do horário de atendimento
    */
   outsideBusinessHours: () => {
-    return `⏰ No momento estamos fora do horário de atendimento.
+    return `No momento estamos fora do horário de atendimento.
 
 ${bold('Horário de funcionamento:')}
 ${config.businessHours.start} às ${config.businessHours.end}
 
 Retornaremos seu contato em ${bold(getNextBusinessTime())}.
 
-Caso prefira, deixe sua mensagem que responderemos assim que possível! 📝`;
+Caso prefira, deixe sua mensagem que responderemos assim que possível!`;
   },
 
   /**
@@ -177,38 +177,38 @@ Por favor, descreva sua necessidade:`
    * Confirmações
    */
   confirmations: {
-    budgetReceived: () => `✅ Perfeito! Recebemos sua solicitação de orçamento.
+    budgetReceived: () => `Perfeito! Recebemos sua solicitação de orçamento.
 
 Nossa equipe analisará as informações e retornaremos com o orçamento em até ${bold(`${config.budgetResponseTime} minutos`)}.
 
-Aguarde nosso contato! 📞`,
+Aguarde nosso contato!`,
 
     transferringToHuman: () => `Sua solicitação foi encaminhada para nossa equipe de atendimento.
 
-Um de nossos especialistas entrará em contato em breve! 👨‍🔧`,
+Um de nossos especialistas entrará em contato em breve!`,
 
-    dataReceived: () => '✅ Informação registrada!'
+    dataReceived: () => 'Informação registrada!'
   },
 
   /**
    * Mensagens de erro
    */
   errors: {
-    invalidOption: () => `❌ Opção inválida. Por favor, escolha uma das opções disponíveis no menu.`,
+    invalidOption: () => `Opção inválida. Por favor, escolha uma das opções disponíveis no menu.`,
 
-    invalidInput: () => `❌ Entrada inválida. Por favor, tente novamente.`,
+    invalidInput: () => `Entrada inválida. Por favor, tente novamente.`,
 
-    generic: () => `❌ Desculpe, ocorreu um erro. Por favor, tente novamente ou digite ${bold('"menu"')} para voltar ao início.`
+    generic: () => `Desculpe, ocorreu um erro. Por favor, tente novamente ou digite ${bold('"menu"')} para voltar ao início.`
   },
 
   /**
    * Mensagens auxiliares
    */
   helpers: {
-    backToMenu: () => `\n\n💡 Digite ${bold('"menu"')} a qualquer momento para voltar ao início.`,
+    backToMenu: () => `\n\nDigite ${bold('"menu"')} a qualquer momento para voltar ao início.`,
 
     confirmationSummary: (data) => {
-      let summary = '\n📋 ${bold("Resumo da sua solicitação:")}\n\n';
+      let summary = '\n${bold("Resumo da sua solicitação:")}\n\n';
 
       if (data.serviceType) summary += `• Serviço: ${data.serviceType}\n`;
       if (data.partName) summary += `• Peça: ${data.partName}\n`;
@@ -216,7 +216,7 @@ Um de nossos especialistas entrará em contato em breve! 👨‍🔧`,
       if (data.quantity) summary += `• Quantidade: ${data.quantity}\n`;
       if (data.size) summary += `• Tamanho: ${data.size}\n`;
       if (data.type) summary += `• Tipo: ${data.type}\n`;
-      if (data.hasPhoto) summary += `• Foto: Enviada ✓\n`;
+      if (data.hasPhoto) summary += `• Foto: Enviada\n`;
 
       return summary;
     }

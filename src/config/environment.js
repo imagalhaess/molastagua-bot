@@ -24,7 +24,7 @@ const validateEnv = () => {
 
 const config = {
   company: {
-    name: process.env.COMPANY_NAME || 'Molas Tágua',
+    name: process.env.COMPANY_NAME || 'MolasTag',
     address: process.env.COMPANY_ADDRESS || '',
     paymentMethods: process.env.PAYMENT_METHODS || ''
   },

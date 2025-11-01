@@ -1,26 +1,26 @@
-# 🤖 MolasTag Bot
+# MolasTag Bot
 
-Chatbot de atendimento automatizado via WhatsApp para oficina Molas Taguatinga, desenvolvido com Node.js seguindo princípios de Clean Code e arquitetura modular.
+Chatbot de atendimento automatizado via WhatsApp para oficina mecânica, desenvolvido com Node.js seguindo princípios de Clean Code e arquitetura modular.
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto foi desenvolvido como ferramenta educacional e prática para automatizar o atendimento inicial de clientes via WhatsApp, coletando informações necessárias para orçamentos e encaminhando para atendimento humano quando necessário.
 
-### ✨ Funcionalidades
+### Funcionalidades
 
-- ✅ **Verificação de horário de atendimento** - Valida automaticamente se está dentro do expediente
-- ✅ **Menu interativo** - Navegação intuitiva com opções numeradas
-- ✅ **Coleta de dados estruturada** - Captura informações de forma organizada
-- ✅ **Múltiplos fluxos de atendimento**:
+- Verificação de horário de atendimento - Valida automaticamente se está dentro do expediente
+- Menu interativo - Navegação intuitiva com opções numeradas
+- Coleta de dados estruturada - Captura informações de forma organizada
+- Múltiplos fluxos de atendimento:
   - Orçamentos (reforço de veículo, molas, suportes, balanças, tirantes)
   - Vendas de peças
   - Solicitações financeiras
   - Transferência para atendimento humano
-- ✅ **Sistema de notificação** - Alerta atendentes sobre novas solicitações
-- ✅ **Contexto de conversa** - Mantém histórico e dados coletados
-- ✅ **Limpeza automática** - Remove conversas inativas periodicamente
+- Sistema de notificação - Alerta atendentes sobre novas solicitações
+- Contexto de conversa - Mantém histórico e dados coletados
+- Limpeza automática - Remove conversas inativas periodicamente
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 O projeto segue uma arquitetura **modular e monolítica**, organizada em camadas claras:
 
@@ -52,7 +52,7 @@ molastagua-bot/
 └── package.json                # Dependências e scripts
 ```
 
-### 🎯 Princípios Aplicados
+### Princípios Aplicados
 
 #### Clean Code
 - **Nomes descritivos**: Variáveis, funções e classes com nomes claros
@@ -67,7 +67,7 @@ molastagua-bot/
 - **Utils**: Funções auxiliares puras
 - **Middlewares**: Roteamento e interceptação
 
-## 🚀 Como Começar
+## Como Começar
 
 ### Pré-requisitos
 
@@ -120,7 +120,7 @@ Quando o bot iniciar, um QR Code aparecerá no terminal. Escaneie com seu WhatsA
 - Clique em **Conectar um aparelho**
 - Escaneie o código
 
-## 📚 Como Usar
+## Como Usar
 
 ### Para Usuários Finais
 
@@ -142,7 +142,7 @@ Após enviar qualquer mensagem, o bot irá:
 
 - `menu` - Volta ao menu principal a qualquer momento
 
-## 🔧 Desenvolvimento
+## Desenvolvimento
 
 ### Estrutura de um Handler
 
@@ -174,7 +174,7 @@ npm start
 # O bot responderá automaticamente
 ```
 
-## 📖 Conceitos para Aprendizado
+## Conceitos para Aprendizado
 
 ### 1. **Arquitetura Modular**
 - Cada módulo tem responsabilidade única
@@ -201,7 +201,7 @@ npm start
 - Configuração flexível por ambiente
 - Validação na inicialização
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **[Node.js](https://nodejs.org/)** - Runtime JavaScript
 - **[whatsapp-web.js](https://wwebjs.dev/)** - Biblioteca WhatsApp Web
@@ -209,7 +209,7 @@ npm start
 - **[dotenv](https://www.npmjs.com/package/dotenv)** - Gerenciamento de variáveis de ambiente
 - **[node-cron](https://www.npmjs.com/package/node-cron)** - Agendamento de tarefas
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Este é um projeto educacional! Contribuições são bem-vindas:
 
@@ -228,7 +228,7 @@ Este é um projeto educacional! Contribuições são bem-vindas:
 - `test:` - Adição de testes
 - `chore:` - Tarefas de manutenção
 
-## ⚠️ Notas Importantes
+## Notas Importantes
 
 ### Limitações Conhecidas
 
@@ -247,17 +247,17 @@ Este é um projeto educacional! Contribuições são bem-vindas:
 - [ ] Adicionar logs estruturados
 - [ ] Criar documentação de API
 
-## 📄 Licença
+## Licença
 
 Este projeto está sob a licença ISC.
 
-## 👤 Autor
+## Autor
 
-Desenvolvido como projeto educacional para **Molas Tágua**
+Desenvolvido como projeto educacional para **MolasTag**
 
 ---
 
-## 🎓 Aprendizados Importantes
+## Aprendizados Importantes
 
 ### Para Estudantes
 
@@ -285,6 +285,6 @@ A: Implemente mocks dos handlers e teste a lógica isoladamente.
 
 ---
 
-**💡 Dica**: Leia o código começando pelo `index.js` e siga o fluxo de execução até os handlers!
+**Dica**: Leia o código começando pelo `index.js` e siga o fluxo de execução até os handlers!
 
-**📧 Suporte**: Abra uma issue no GitHub para dúvidas ou problemas.
+**Suporte**: Abra uma issue no GitHub para dúvidas ou problemas.

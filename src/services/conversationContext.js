@@ -134,8 +134,8 @@ class ConversationContext {
     const context = this.get(chatId);
     const data = context.data;
 
-    let summary = '📋 *RESUMO DO ATENDIMENTO*\n\n';
-    summary += `⏰ Iniciado em: ${context.createdAt.toLocaleString('pt-BR')}\n\n`;
+    let summary = '*RESUMO DO ATENDIMENTO*\n\n';
+    summary += `Iniciado em: ${context.createdAt.toLocaleString('pt-BR')}\n\n`;
 
     if (Object.keys(data).length > 0) {
       summary += '*Informações coletadas:*\n';

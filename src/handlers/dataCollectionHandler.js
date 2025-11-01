@@ -72,10 +72,10 @@ class DataCollectionHandler {
     if (hasPhoto) {
       ConversationContext.setData(chatId, 'hasPhoto', true);
       ConversationContext.setData(chatId, 'photoMessage', message);
-      await client.sendMessage(chatId, '📸 Foto recebida!');
+      await client.sendMessage(chatId, 'Foto recebida!');
     } else if (textResponse === 'pular') {
       ConversationContext.setData(chatId, 'hasPhoto', false);
-      await client.sendMessage(chatId, '✅ Ok, continuando sem foto.');
+      await client.sendMessage(chatId, 'Ok, continuando sem foto.');
     } else {
       await client.sendMessage(chatId, 'Por favor, envie uma foto ou digite "pular" para continuar.');
       return;

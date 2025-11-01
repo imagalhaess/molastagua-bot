@@ -16,7 +16,7 @@ class SalesHandler {
     ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
     ConversationContext.setData(chatId, 'serviceType', 'Venda de peça');
 
-    await client.sendMessage(chatId, `*VENDAS* 🛒
+    await client.sendMessage(chatId, `*VENDAS*
 
 Qual peça você está procurando?
 

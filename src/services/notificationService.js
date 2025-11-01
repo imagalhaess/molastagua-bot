@@ -23,9 +23,9 @@ class NotificationService {
       const summary = ConversationContext.generateSummary(chatId);
       const allData = ConversationContext.getAllData(chatId);
 
-      let notification = `🔔 *NOVA SOLICITAÇÃO*\n\n`;
-      notification += `📱 Cliente: ${chatId}\n`;
-      notification += `📋 Tipo: ${type}\n\n`;
+      let notification = `*NOVA SOLICITAÇÃO*\n\n`;
+      notification += `Cliente: ${chatId}\n`;
+      notification += `Tipo: ${type}\n\n`;
       notification += summary;
 
       // Envia notificação para o número do atendente
@@ -34,13 +34,13 @@ class NotificationService {
 
       // Se houver foto, encaminha também
       if (allData.photoMessage) {
-        await client.sendMessage(supportChatId, '📸 Foto enviada pelo cliente:');
+        await client.sendMessage(supportChatId, 'Foto enviada pelo cliente:');
         // A foto seria encaminhada aqui
       }
 
-      console.log(`✅ Notificação enviada para atendente - Chat: ${chatId}`);
+      console.log(`Notificação enviada para atendente - Chat: ${chatId}`);
     } catch (error) {
-      console.error('❌ Erro ao enviar notificação:', error);
+      console.error('Erro ao enviar notificação:', error);
     }
   }
 

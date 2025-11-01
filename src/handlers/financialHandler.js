@@ -26,7 +26,7 @@ class FinancialHandler {
     const description = message.body.trim();
     ConversationContext.setData(chatId, 'description', description);
 
-    await client.sendMessage(chatId, `✅ Sua solicitação financeira foi recebida!
+    await client.sendMessage(chatId, `Sua solicitação financeira foi recebida!
 
 Nossa equipe do financeiro entrará em contato em breve para atendê-lo.`);
 
