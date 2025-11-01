@@ -16,7 +16,7 @@ Este projeto foi desenvolvido como ferramenta educacional e prática para automa
   - Vendas de peças
   - Solicitações financeiras
   - Transferência para atendimento humano
-- Sistema de notificação - Alerta atendentes sobre novas solicitações
+- Sistema de notificação - Registra logs detalhados quando atendimento humano é necessário
 - Contexto de conversa - Mantém histórico e dados coletados
 - Limpeza automática - Remove conversas inativas periodicamente
 
@@ -109,7 +109,6 @@ SATURDAY_START=08:00
 SATURDAY_END=12:00
 
 BUDGET_RESPONSE_TIME=45
-HUMAN_SUPPORT_NUMBER=5511999999999
 NODE_ENV=development
 ```
 

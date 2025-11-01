@@ -1,46 +1,54 @@
 /**
  * Serviço de notificações
  * Gerencia notificações para atendentes humanos
+ *
+ * IMPORTANTE: O bot e o atendente humano compartilham o mesmo número.
+ * As notificações são apenas logs internos para que o atendente saiba
+ * quando precisa assumir manualmente a conversa.
  */
 
-const { config } = require('../config/environment');
 const ConversationContext = require('./conversationContext');
 
 class NotificationService {
   /**
-   * Notifica atendente sobre nova solicitação
+   * Registra solicitação de atendimento humano
+   * Gera log detalhado para o atendente assumir a conversa
    * @param {Object} client - Cliente WhatsApp
    * @param {string} chatId - ID do chat do cliente
    * @param {string} type - Tipo de solicitação
    */
   static async notifyHumanSupport(client, chatId, type) {
-    if (!config.humanSupportNumber) {
-      console.warn('⚠️  Número de atendente não configurado');
-      return;
-    }
-
     try {
       const summary = ConversationContext.generateSummary(chatId);
       const allData = ConversationContext.getAllData(chatId);
+      const phoneNumber = chatId.replace('@c.us', '');
 
-      let notification = `*NOVA SOLICITAÇÃO*\n\n`;
-      notification += `Cliente: ${chatId}\n`;
-      notification += `Tipo: ${type}\n\n`;
-      notification += summary;
+      // Log detalhado no console para o atendente
+      console.log('\n' + '='.repeat(60));
+      console.log('ATENDIMENTO HUMANO SOLICITADO');
+      console.log('='.repeat(60));
+      console.log(`Cliente: ${phoneNumber}`);
+      console.log(`Tipo: ${type}`);
+      console.log(`Horário: ${new Date().toLocaleString('pt-BR')}`);
+      console.log('-'.repeat(60));
+      console.log('CONTEXTO DA CONVERSA:');
+      console.log(summary);
 
-      // Envia notificação para o número do atendente
-      const supportChatId = `${config.humanSupportNumber}@c.us`;
-      await client.sendMessage(supportChatId, notification);
-
-      // Se houver foto, encaminha também
       if (allData.photoMessage) {
-        await client.sendMessage(supportChatId, 'Foto enviada pelo cliente:');
-        // A foto seria encaminhada aqui
+        console.log('-'.repeat(60));
+        console.log('MÍDIA: Cliente enviou foto(s)');
       }
 
-      console.log(`Notificação enviada para atendente - Chat: ${chatId}`);
+      console.log('='.repeat(60));
+      console.log('AÇÃO: Atendente deve assumir a conversa manualmente');
+      console.log('='.repeat(60) + '\n');
+
+      // Marca no contexto que está aguardando atendente
+      ConversationContext.setData(chatId, 'awaitingHumanSupport', true);
+      ConversationContext.setData(chatId, 'humanSupportRequestedAt', new Date().toISOString());
+
     } catch (error) {
-      console.error('Erro ao enviar notificação:', error);
+      console.error('Erro ao registrar solicitação de atendimento humano:', error);
     }
   }
 

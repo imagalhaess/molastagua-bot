@@ -14,7 +14,7 @@ const messages = {
   welcome: () => {
     return `Olá! Seja bem-vindo(a) à ${bold(config.company.name)}!
 
-Somos especializados em serviços de mecânica automotiva, oferecendo soluções completas para seu veículo.
+Somos especializados em serviços de suspensão automotiva, oferecendo soluções completas para seu veículo.
 
 ${bold('Localização:')} ${config.company.address}
 

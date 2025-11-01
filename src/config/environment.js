@@ -13,7 +13,8 @@ const validateEnv = () => {
     'WEEKDAY_START',
     'WEEKDAY_END',
     'SATURDAY_START',
-    'SATURDAY_END'
+    'SATURDAY_END',
+    'BUDGET_RESPONSE_TIME'
   ];
 
   const missing = requiredVars.filter(varName => !process.env[varName]);
@@ -42,7 +43,6 @@ const config = {
     }
   },
   budgetResponseTime: parseInt(process.env.BUDGET_RESPONSE_TIME || '45', 10),
-  humanSupportNumber: process.env.HUMAN_SUPPORT_NUMBER || '',
   nodeEnv: process.env.NODE_ENV || 'development'
 };
 

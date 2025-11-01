@@ -24,11 +24,6 @@ SATURDAY_END=12:00
 # Tempo de resposta para orçamentos (em minutos)
 BUDGET_RESPONSE_TIME=45
 
-# Número do atendente humano (IMPORTANTE!)
-# Formato: código país + DDD + número (sem espaços)
-# Exemplo: 5511999999999
-HUMAN_SUPPORT_NUMBER=5511999999999
-
 # Ambiente
 NODE_ENV=production
 ```
@@ -193,14 +188,14 @@ SATURDAY_END=13:00
 
 ---
 
-### Notificações não chegam
+### Não vejo os logs de atendimento
 
-**Problema:** Atendente não recebe notificações
+**Problema:** Logs não aparecem no console
 
 **Solução:**
-1. Verifique o `HUMAN_SUPPORT_NUMBER` no `.env`
-2. Formato correto: `5511999999999` (sem espaços ou caracteres especiais)
-3. Número deve estar salvo no WhatsApp conectado
+1. Certifique-se de que o bot está rodando no terminal
+2. Logs aparecem quando cliente solicita atendimento humano
+3. Verifique se o console não está ocultando saídas
 
 ---
 
@@ -377,3 +372,53 @@ Antes de colocar em produção:
 **🎉 Pronto! Seu bot está pronto para uso!**
 
 Qualquer dúvida, consulte `GUIA_APRENDIZADO.md` ou abra uma issue no GitHub.
+
+---
+
+## Sistema de Notificação para Atendimento Humano
+
+### Como Funciona
+
+O bot e o atendente humano **compartilham o mesmo número do WhatsApp**. Quando um cliente precisa de atendimento humano:
+
+1. **Bot coleta informações** do cliente (nome da peça, localização, quantidade, fotos, etc.)
+2. **Bot confirma recebimento** para o cliente
+3. **Bot registra LOG DETALHADO no console** com todo o contexto
+4. **Atendente visualiza o log** e assume a conversa manualmente
+5. **Atendente responde** diretamente no WhatsApp como faria normalmente
+
+### Exemplo de Uso Prático
+
+**Situação:** Cliente solicita orçamento de mola
+
+1. Cliente conversa com o bot
+2. Bot coleta: tipo de serviço, nome da peça, localização, quantidade, foto
+3. Console exibe:
+   ```
+   ============================================================
+   ATENDIMENTO HUMANO SOLICITADO
+   ============================================================
+   Cliente: 5561999887766
+   Tipo: Orçamento - Troca de mola
+   ...
+   ```
+4. Atendente vê o log no console
+5. Atendente abre o WhatsApp e responde para 5561999887766
+6. Atendente tem todo o contexto da conversa disponível
+
+### Vantagens
+
+- **Sem transferências:** Cliente continua no mesmo chat
+- **Contexto preservado:** Atendente sabe tudo que foi conversado
+- **Flexível:** Atendente assume quando necessário
+- **Natural:** Cliente não percebe a transição bot → humano
+
+### Logs Disponíveis
+
+Todos os logs ficam visíveis no console onde o bot está rodando:
+- Tipo de solicitação
+- Dados coletados
+- Horário da solicitação
+- Histórico da conversa
+- Indicação se há fotos anexadas
+
