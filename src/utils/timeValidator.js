@@ -119,9 +119,101 @@ const findNextBusinessDay = (currentDay) => {
   return 1;
 };
 
+/**
+ * Retorna o próximo dia de funcionamento (sem horário)
+ * @returns {string} - Descrição do próximo dia de funcionamento
+ */
+const getNextBusinessDay = () => {
+  const now = new Date();
+  const currentDay = now.getDay();
+  const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+  const daysOfWeek = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+
+  const todaySchedule = getScheduleForDay(currentDay);
+
+  // Se hoje é dia de atendimento mas já passou o horário
+  if (todaySchedule && currentTime > todaySchedule.end) {
+    const nextDay = findNextBusinessDay(currentDay);
+    return daysOfWeek[nextDay];
+  }
+
+  // Se hoje não é dia de atendimento
+  if (!todaySchedule) {
+    const nextDay = findNextBusinessDay(currentDay);
+    return daysOfWeek[nextDay];
+  }
+
+  // Se ainda não começou o expediente hoje ou está em horário de atendimento
+  if (currentTime < todaySchedule.start || isBusinessHours(now)) {
+    return 'em breve';
+  }
+
+  // Fallback: próximo dia útil
+  const nextDay = findNextBusinessDay(currentDay);
+  return daysOfWeek[nextDay];
+};
+
+/**
+ * Retorna o próximo dia de atendimento com gramática correta e data
+ * @returns {string} - Descrição do próximo dia com preposição correta e data (dd-mm)
+ */
+const getNextBusinessDate = () => {
+  const now = new Date();
+  const currentDay = now.getDay();
+  const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+  const daysOfWeek = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+
+  const todaySchedule = getScheduleForDay(currentDay);
+
+  let targetDate = new Date(now);
+  let targetDayOfWeek = currentDay;
+
+  // Se hoje é dia de atendimento mas já passou o horário
+  if (todaySchedule && currentTime > todaySchedule.end) {
+    const nextDay = findNextBusinessDay(currentDay);
+    const daysToAdd = (nextDay - currentDay + 7) % 7;
+    targetDate.setDate(targetDate.getDate() + daysToAdd);
+    targetDayOfWeek = nextDay;
+  }
+  // Se hoje não é dia de atendimento
+  else if (!todaySchedule) {
+    const nextDay = findNextBusinessDay(currentDay);
+    const daysToAdd = (nextDay - currentDay + 7) % 7;
+    targetDate.setDate(targetDate.getDate() + daysToAdd);
+    targetDayOfWeek = nextDay;
+  }
+  // Se ainda não começou o expediente hoje ou está em horário de atendimento
+  else if (currentTime < todaySchedule.start || isBusinessHours(now)) {
+    // Usa a data de hoje
+    targetDayOfWeek = currentDay;
+  }
+  // Fallback: próximo dia útil
+  else {
+    const nextDay = findNextBusinessDay(currentDay);
+    const daysToAdd = (nextDay - currentDay + 7) % 7;
+    targetDate.setDate(targetDate.getDate() + daysToAdd);
+    targetDayOfWeek = nextDay;
+  }
+
+  const day = String(targetDate.getDate()).padStart(2, '0');
+  const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+  const dateFormatted = `${day}/${month}`;
+
+  const dayName = daysOfWeek[targetDayOfWeek];
+
+  // Sábado usa "no", demais dias usam "na"
+  const preposition = dayName === 'sábado' ? 'no' : 'na';
+
+  return `${preposition} ${dayName} (${dateFormatted})`;
+};
+
 module.exports = {
   isBusinessHours,
   getNextBusinessTime,
+  getNextBusinessDay,
+  getNextBusinessDate,
   getBusinessHoursDescription,
   getScheduleForDay
 };

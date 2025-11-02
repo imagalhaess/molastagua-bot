@@ -83,6 +83,16 @@ client.on('message', async (message) => {
     // Ignora mensagens enviadas pelo próprio bot
     if (message.fromMe) return;
 
+    // Ignora mensagens antigas (mais de 1 minuto) para evitar processar mensagens quando o bot estava offline
+    const messageTimestamp = message.timestamp * 1000; // Converte para milissegundos
+    const now = Date.now();
+    const oneMinute = 60 * 1000;
+
+    if (now - messageTimestamp > oneMinute) {
+      console.log(`\nMensagem antiga ignorada de ${message.from} (${Math.floor((now - messageTimestamp) / 1000)}s atrás)`);
+      return;
+    }
+
     const chatId = message.from;
     const messageBody = message.body;
 

@@ -5,21 +5,20 @@
 
 const { config } = require('../config/environment');
 const { bold, formatMenu, separator } = require('../utils/messageFormatter');
-const { getNextBusinessTime, getBusinessHoursDescription } = require('../utils/timeValidator');
+const { getNextBusinessTime, getNextBusinessDate, getBusinessHoursDescription } = require('../utils/timeValidator');
 
 const messages = {
   /**
    * Mensagem de boas-vindas
    */
   welcome: () => {
-    return `Olá! Seja bem-vindo(a) à ${bold(config.company.name)}!
+    return `Olá! Bem vindo(a) à ${bold('Molas Taguatinga')}! 🚚
 
-Somos especializados em serviços de suspensão automotiva, oferecendo soluções completas para seu veículo.
+Desde ${bold('1992')} cuidando da suspensão do seu veículo com qualidade, experiência e confiança! São mais de ${bold('30 anos')} de tradição servindo o Distrito Federal e região. ✨
 
-${bold('Localização:')} ${config.company.address}
+Estamos aqui para oferecer as melhores soluções em suspensão automotiva para você!
 
-${bold('Formas de pagamento:')}
-${config.company.paymentMethods}`;
+Como posso te ajudar hoje?`;
   },
 
   /**
@@ -31,7 +30,7 @@ ${config.company.paymentMethods}`;
 ${bold('Horário de funcionamento:')}
 ${getBusinessHoursDescription()}
 
-Retornaremos seu contato em ${bold(getNextBusinessTime())}.
+Obrigado por escolher a ${bold('Molas Taguatinga')}! Retornaremos seu contato em ${bold(getNextBusinessDate())}.
 
 Caso prefira, deixe sua mensagem que responderemos assim que possível!`;
   },
@@ -188,6 +187,8 @@ Por favor, descreva sua necessidade:`
     budgetReceived: () => `Perfeito! Recebemos sua solicitação de orçamento.
 
 Nossa equipe analisará as informações e retornaremos com o orçamento em até ${bold(`${config.budgetResponseTime} minutos`)}.
+
+Aceitamos pagamentos em ${bold('pix')}, ${bold('dinheiro')} ou ${bold('cartão')}. 💳
 
 Aguarde nosso contato!`,
 

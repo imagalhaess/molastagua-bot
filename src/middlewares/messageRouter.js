@@ -3,16 +3,16 @@
  * Direciona mensagens para os handlers apropriados baseado no estado da conversa
  */
 
-const { MENU_OPTIONS, CONVERSATION_STATES } = require('../config/constants');
-const ConversationContext = require('../services/conversationContext');
-const { isBusinessHours } = require('../utils/timeValidator');
-const messages = require('../flows/messages');
+const { MENU_OPTIONS, CONVERSATION_STATES } = require("../config/constants");
+const ConversationContext = require("../services/conversationContext");
+const { isBusinessHours, getNextBusinessDay } = require("../utils/timeValidator");
+const messages = require("../flows/messages");
 
-const ServicesHandler = require('../handlers/servicesHandler');
-const DataCollectionHandler = require('../handlers/dataCollectionHandler');
-const SalesHandler = require('../handlers/salesHandler');
-const FinancialHandler = require('../handlers/financialHandler');
-const VehicleDataHandler = require('../handlers/vehicleDataHandler');
+const ServicesHandler = require("../handlers/servicesHandler");
+const DataCollectionHandler = require("../handlers/dataCollectionHandler");
+const SalesHandler = require("../handlers/salesHandler");
+const FinancialHandler = require("../handlers/financialHandler");
+const VehicleDataHandler = require("../handlers/vehicleDataHandler");
 
 class MessageRouter {
   /**
@@ -23,7 +23,7 @@ class MessageRouter {
     const messageBody = message.body.trim().toLowerCase();
 
     // Comando especial para voltar ao menu
-    if (messageBody === 'menu') {
+    if (messageBody === "menu") {
       ConversationContext.reset(chatId);
       await this.handleInitialContact(client, chatId);
       return;
@@ -106,11 +106,19 @@ class MessageRouter {
         break;
 
       case CONVERSATION_STATES.COLLECTING_DESCRIPTION:
-        const serviceType = ConversationContext.getData(chatId, 'serviceType');
-        if (serviceType === 'Financeiro') {
-          await FinancialHandler.finalizeFinancialRequest(client, message, chatId);
+        const serviceType = ConversationContext.getData(chatId, "serviceType");
+        if (serviceType === "Financeiro") {
+          await FinancialHandler.finalizeFinancialRequest(
+            client,
+            message,
+            chatId
+          );
         } else {
-          await DataCollectionHandler.collectDescription(client, message, chatId);
+          await DataCollectionHandler.collectDescription(
+            client,
+            message,
+            chatId
+          );
         }
         break;
 
@@ -119,11 +127,19 @@ class MessageRouter {
         break;
 
       case CONVERSATION_STATES.WAITING_HUMAN:
-        await client.sendMessage(chatId, 'Sua solicitação já foi encaminhada para nossa equipe. Aguarde o contato! 📞');
+        const nextDay = getNextBusinessDay();
+        const contactTime = nextDay === 'em breve' ? nextDay : `na ${nextDay}`;
+        await client.sendMessage(
+          chatId,
+          `Sua solicitação já foi encaminhada para nossa equipe. Entraremos em contato ${contactTime}. 📞`
+        );
         break;
 
       default:
-        await this.handleInitialContact(client, chatId);
+        // Se chegou aqui sem estado definido, é um erro de lógica
+        // Não envia mensagens automaticamente para evitar spam
+        console.warn(`Estado desconhecido para ${chatId}: ${currentState}`);
+        break;
     }
   }
 
@@ -169,10 +185,19 @@ class MessageRouter {
         break;
 
       case MENU_OPTIONS.MAIN.HUMAN_SUPPORT:
-        await client.sendMessage(chatId, messages.confirmations.transferringToHuman());
+        await client.sendMessage(
+          chatId,
+          messages.confirmations.transferringToHuman()
+        );
         ConversationContext.setState(chatId, CONVERSATION_STATES.WAITING_HUMAN);
-        const { NotificationService } = require('../services/notificationService');
-        await NotificationService.notifyHumanSupport(client, chatId, 'Solicitação de atendimento humano');
+        const {
+          NotificationService,
+        } = require("../services/notificationService");
+        await NotificationService.notifyHumanSupport(
+          client,
+          chatId,
+          "Solicitação de atendimento humano"
+        );
         break;
 
       default:
