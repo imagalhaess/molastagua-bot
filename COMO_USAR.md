@@ -82,9 +82,9 @@ Opções disponíveis:
 - **Orçamento** - Reforçar veículo
 - **Molas** - Troca ou arquear
   - Coleta: nome da peça, localização, quantidade, foto
-- **Suporte** - Troca ou recuperação
+- **Suporte** - Troca
   - Coleta: nome da peça, localização, quantidade, foto
-- **Balança** - Troca ou recuperação
+- **Balança** - Troca
   - Coleta: nome da peça, quantidade, foto
 - **Tirante** - Troca de bucha ou tirante completo
   - Coleta: nome da peça, tipo (fixo/regulagem), tamanho, quantidade, foto

@@ -134,23 +134,46 @@ class DataCollectionHandler {
    */
   static async finalizeBudgetRequest(client, chatId) {
     const allData = ConversationContext.getAllData(chatId);
-    const serviceType = allData.serviceType || 'Serviço';
 
-    // Mostra resumo
+    // Mostra resumo e aguarda confirmação
     const summary = messages.helpers.confirmationSummary(allData);
     await client.sendMessage(chatId, summary);
 
-    // Confirma recebimento
-    await client.sendMessage(chatId, messages.confirmations.budgetReceived());
+    // Muda estado para aguardar confirmação
+    ConversationContext.setState(chatId, CONVERSATION_STATES.AWAITING_CONFIRMATION);
+  }
 
-    // Notifica atendente
-    await NotificationService.notifyHumanSupport(client, chatId, serviceType);
+  /**
+   * Processa confirmação do pedido
+   */
+  static async handleConfirmation(client, message, chatId) {
+    const option = message.body.trim();
+    const allData = ConversationContext.getAllData(chatId);
+    const serviceType = allData.serviceType || 'Serviço';
 
-    // Log da ação
-    NotificationService.logAction(chatId, `Budget request completed: ${serviceType}`);
+    if (option === '1') {
+      // Confirma recebimento
+      await client.sendMessage(chatId, messages.confirmations.budgetReceived());
 
-    // Reseta para menu principal
-    ConversationContext.setState(chatId, CONVERSATION_STATES.WAITING_HUMAN);
+      // Notifica atendente
+      await NotificationService.notifyHumanSupport(client, chatId, serviceType);
+
+      // Log da ação
+      NotificationService.logAction(chatId, `Budget request completed: ${serviceType}`);
+
+      // Reseta para menu principal
+      ConversationContext.setState(chatId, CONVERSATION_STATES.WAITING_HUMAN);
+    } else if (option === '2') {
+      // Limpa dados e volta ao início
+      ConversationContext.clearData(chatId);
+      ConversationContext.setState(chatId, CONVERSATION_STATES.MAIN_MENU);
+      await client.sendMessage(chatId, messages.mainMenu());
+    } else {
+      await client.sendMessage(chatId, messages.errors.invalidOption());
+      // Mostra resumo novamente
+      const summary = messages.helpers.confirmationSummary(allData);
+      await client.sendMessage(chatId, summary);
+    }
   }
 }
 

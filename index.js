@@ -43,11 +43,56 @@ const client = new Client({
   }
 });
 
+// Contador de QR codes
+let qrCount = 0;
+let lastQrTime = 0;
+
 // Evento: QR Code gerado
 client.on('qr', (qr) => {
-  console.log('\nQR Code gerado! Escaneie com seu WhatsApp:\n');
+  qrCount++;
+  lastQrTime = Date.now();
+
+  // Limpa o console para evitar poluição visual
+  console.clear();
+
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log(`🔄 NOVO CÓDIGO DE PAREAMENTO #${qrCount}`);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  // Gera link de pareamento
+  const pairingLink = `https://wa.me/qr/${Buffer.from(qr).toString('base64')}`;
+
+  console.log('⚠️  ATENÇÃO: Este link expira em ~20 segundos!\n');
+  console.log('🔗 LINK DE PAREAMENTO:\n');
+  console.log(`${pairingLink}\n`);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  // Contador regressivo visual
+  console.log('⏱️  PREPARAÇÃO RÁPIDA:');
+  console.log('   1. ANTES de gerar novo código: peça para a pessoa');
+  console.log('      abrir WhatsApp > Aparelhos conectados > Conectar');
+  console.log('   2. Pessoa deve estar COM A CÂMERA ABERTA esperando');
+  console.log('   3. Compartilhe o link acima VIA CHAMADA/VIDEOCHAMADA');
+  console.log('   4. Pessoa clica IMEDIATAMENTE no link\n');
+
+  // Também mostra o QR code
+  console.log('📱 QR CODE (se conseguir compartilhar tela):\n');
   qrcode.generate(qr, { small: true });
-  console.log('\nDica: Abra o WhatsApp > Aparelhos conectados > Conectar um aparelho\n');
+
+  console.log('\n💡 DICAS PARA CONEXÃO REMOTA:');
+  console.log('   • Use chamada de vídeo/compartilhamento de tela');
+  console.log('   • OU: Tire print do QR code e envie a foto');
+  console.log('   • OU: Use AnyDesk/TeamViewer para acesso remoto');
+  console.log('   • Pessoa deve estar PRONTA antes de gerar novo código\n');
+
+  // Timer visual
+  let secondsLeft = 20;
+  const countdown = setInterval(() => {
+    secondsLeft--;
+    if (secondsLeft <= 0 || Date.now() - lastQrTime > 20000) {
+      clearInterval(countdown);
+    }
+  }, 1000);
 });
 
 // Evento: Cliente autenticado
@@ -83,12 +128,12 @@ client.on('message', async (message) => {
     // Ignora mensagens enviadas pelo próprio bot
     if (message.fromMe) return;
 
-    // Ignora mensagens antigas (mais de 1 minuto) para evitar processar mensagens quando o bot estava offline
+    // Ignora mensagens antigas (mais de 15 segundos) para evitar processar mensagens quando o bot estava offline
     const messageTimestamp = message.timestamp * 1000; // Converte para milissegundos
     const now = Date.now();
-    const oneMinute = 60 * 1000;
+    const fifteenSeconds = 15 * 1000;
 
-    if (now - messageTimestamp > oneMinute) {
+    if (now - messageTimestamp > fifteenSeconds) {
       console.log(`\nMensagem antiga ignorada de ${message.from} (${Math.floor((now - messageTimestamp) / 1000)}s atrás)`);
       return;
     }

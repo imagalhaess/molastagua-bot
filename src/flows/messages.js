@@ -39,14 +39,12 @@ Caso prefira, deixe sua mensagem que responderemos assim que possível!`;
    * Menu principal
    */
   mainMenu: () => {
-    return `${separator()}Como podemos ajudá-lo(a) hoje?
+    return `Digite o número da opção desejada:
 
-${formatMenu([
-      { key: '1', label: 'Serviços' },
-      { key: '2', label: 'Vendas' },
-      { key: '3', label: 'Financeiro' },
-      { key: '4', label: 'Falar com atendente' }
-    ])}${separator()}`;
+1 - Serviços
+2 - Vendas
+3 - Financeiro
+4 - Falar com atendente`;
   },
 
   /**
@@ -55,13 +53,13 @@ ${formatMenu([
   servicesMenu: () => {
     return `${bold('SERVIÇOS')}
 
-Selecione o serviço desejado:
+Digite o número do serviço desejado:
 
 ${formatMenu([
-      { key: '1', label: 'Orçamento - Reforçar veículo' },
+      { key: '1', label: 'Reforçar veículo' },
       { key: '2', label: 'Molas (troca/arquear)' },
-      { key: '3', label: 'Suporte (troca/recuperação)' },
-      { key: '4', label: 'Balança (troca/recuperação)' },
+      { key: '3', label: 'Suporte (troca)' },
+      { key: '4', label: 'Balança (troca)' },
       { key: '5', label: 'Tirante' },
       { key: '6', label: 'Outros serviços' },
       { key: '0', label: 'Voltar ao menu principal' }
@@ -74,7 +72,7 @@ ${formatMenu([
   springsMenu: () => {
     return `${bold('SERVIÇO DE MOLAS')}
 
-O que você precisa?
+Digite o número da opção desejada:
 
 ${formatMenu([
       { key: '1', label: 'Troca de mola' },
@@ -89,11 +87,10 @@ ${formatMenu([
   supportMenu: () => {
     return `${bold('SERVIÇO DE SUPORTE')}
 
-Selecione a opção desejada:
+Digite o número da opção desejada:
 
 ${formatMenu([
       { key: '1', label: 'Troca de suporte' },
-      { key: '2', label: 'Recuperação de suporte' },
       { key: '0', label: 'Voltar' }
     ])}`;
   },
@@ -104,11 +101,10 @@ ${formatMenu([
   balanceMenu: () => {
     return `${bold('SERVIÇO DE BALANÇA')}
 
-Selecione a opção desejada:
+Digite o número da opção desejada:
 
 ${formatMenu([
       { key: '1', label: 'Troca de balança' },
-      { key: '2', label: 'Recuperação de balança' },
       { key: '0', label: 'Voltar' }
     ])}`;
   },
@@ -119,7 +115,7 @@ ${formatMenu([
   tieRodMenu: () => {
     return `${bold('SERVIÇO DE TIRANTE')}
 
-Selecione a opção desejada:
+Digite o número da opção desejada:
 
 ${formatMenu([
       { key: '1', label: 'Troca de bucha' },
@@ -134,13 +130,13 @@ ${formatMenu([
   requests: {
     vehicleModel: () => `Por favor, informe o ${bold('modelo do veículo')}:
 
-Exemplo: Fiat Uno, VW Gol, Chevrolet Onix, etc.`,
+Exemplo: Ford Cargo, Mercedes-Benz Accelo, Volkswagen Delivery, Iveco Daily, etc.`,
 
     vehicleYear: () => `Qual o ${bold('ano do veículo')}?
 
 Exemplo: 2015, 2020, etc.`,
 
-    partName: () => 'Por favor, informe o ${bold("nome da peça")}:',
+    partName: () => `Por favor, informe o ${bold("nome da peça")}:`,
 
     location: () => `Informe a ${bold('localização')} da peça:
 
@@ -156,7 +152,7 @@ Exemplos:
 
 Se não tiver foto no momento, pode digitar ${bold('"pular"')} para continuar.`,
 
-    tieRodType: () => `Qual o ${bold('tipo')} do tirante?
+    tieRodType: () => `Digite o número do ${bold('tipo')} do tirante:
 
 ${formatMenu([
       { key: '1', label: 'Fixo' },
@@ -217,7 +213,7 @@ Um de nossos especialistas entrará em contato em breve!`,
     backToMenu: () => `\n\nDigite ${bold('"menu"')} a qualquer momento para voltar ao início.`,
 
     confirmationSummary: (data) => {
-      let summary = '\n${bold("Resumo da sua solicitação:")}\n\n';
+      let summary = `\n${bold("Resumo da sua solicitação:")}\n\n`;
 
       if (data.serviceType) summary += `• Serviço: ${data.serviceType}\n`;
       if (data.partName) summary += `• Peça: ${data.partName}\n`;
@@ -226,6 +222,10 @@ Um de nossos especialistas entrará em contato em breve!`,
       if (data.size) summary += `• Tamanho: ${data.size}\n`;
       if (data.type) summary += `• Tipo: ${data.type}\n`;
       if (data.hasPhoto) summary += `• Foto: Enviada\n`;
+
+      summary += `\nDigite o número da opção desejada:\n\n`;
+      summary += `1 - Confirmar pedido\n`;
+      summary += `2 - Recomeçar do início`;
 
       return summary;
     }

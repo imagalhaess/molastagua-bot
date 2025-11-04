@@ -29,15 +29,12 @@ Por favor, informe o *nome da peça*:`);
   static async finalizeSalesRequest(client, chatId) {
     const allData = ConversationContext.getAllData(chatId);
 
+    // Mostra resumo e aguarda confirmação
     const summary = messages.helpers.confirmationSummary(allData);
     await client.sendMessage(chatId, summary);
 
-    await client.sendMessage(chatId, messages.confirmations.budgetReceived());
-
-    await NotificationService.notifyHumanSupport(client, chatId, 'Venda de peça');
-    NotificationService.logAction(chatId, 'Sales request completed');
-
-    ConversationContext.setState(chatId, CONVERSATION_STATES.WAITING_HUMAN);
+    // Muda estado para aguardar confirmação
+    ConversationContext.setState(chatId, CONVERSATION_STATES.AWAITING_CONFIRMATION);
   }
 }
 

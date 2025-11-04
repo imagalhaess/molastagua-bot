@@ -132,20 +132,14 @@ class ServicesHandler {
       return;
     }
 
-    let serviceType = '';
     if (option === MENU_OPTIONS.SERVICE_DETAILS.SUPPORT.EXCHANGE) {
-      serviceType = 'Troca de suporte';
-    } else if (option === MENU_OPTIONS.SERVICE_DETAILS.SUPPORT.RECOVERY) {
-      serviceType = 'Recuperação de suporte';
+      ConversationContext.setData(chatId, 'serviceType', 'Troca de suporte');
+      ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
+      await client.sendMessage(chatId, messages.requests.partName());
     } else {
       await client.sendMessage(chatId, messages.errors.invalidOption());
       await client.sendMessage(chatId, messages.supportMenu());
-      return;
     }
-
-    ConversationContext.setData(chatId, 'serviceType', serviceType);
-    ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
-    await client.sendMessage(chatId, messages.requests.partName());
   }
 
   /**
@@ -160,20 +154,14 @@ class ServicesHandler {
       return;
     }
 
-    let serviceType = '';
     if (option === MENU_OPTIONS.SERVICE_DETAILS.BALANCE.EXCHANGE) {
-      serviceType = 'Troca de balança';
-    } else if (option === MENU_OPTIONS.SERVICE_DETAILS.BALANCE.RECOVERY) {
-      serviceType = 'Recuperação de balança';
+      ConversationContext.setData(chatId, 'serviceType', 'Troca de balança');
+      ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
+      await client.sendMessage(chatId, messages.requests.partName());
     } else {
       await client.sendMessage(chatId, messages.errors.invalidOption());
       await client.sendMessage(chatId, messages.balanceMenu());
-      return;
     }
-
-    ConversationContext.setData(chatId, 'serviceType', serviceType);
-    ConversationContext.setState(chatId, CONVERSATION_STATES.COLLECTING_PART_NAME);
-    await client.sendMessage(chatId, messages.requests.partName());
   }
 
   /**

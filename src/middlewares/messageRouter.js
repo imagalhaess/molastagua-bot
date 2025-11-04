@@ -126,6 +126,10 @@ class MessageRouter {
         await DataCollectionHandler.collectPartName(client, message, chatId);
         break;
 
+      case CONVERSATION_STATES.AWAITING_CONFIRMATION:
+        await DataCollectionHandler.handleConfirmation(client, message, chatId);
+        break;
+
       case CONVERSATION_STATES.WAITING_HUMAN:
         const nextDay = getNextBusinessDay();
         const contactTime = nextDay === 'em breve' ? nextDay : `na ${nextDay}`;
