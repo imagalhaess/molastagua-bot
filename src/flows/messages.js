@@ -192,7 +192,14 @@ Aguarde nosso contato!`,
 
 Um de nossos especialistas entrará em contato em breve!`,
 
-    dataReceived: () => 'Informação registrada!'
+    dataReceived: () => 'Informação registrada!',
+
+    waitingHumanOptions: (contactTime) => `Sua solicitação já foi encaminhada para nossa equipe. Entraremos em contato ${contactTime}. 📞
+
+Digite o número da opção desejada:
+
+1 - Ver meu pedido
+2 - Voltar ao menu principal`
   },
 
   /**

@@ -131,12 +131,7 @@ class MessageRouter {
         break;
 
       case CONVERSATION_STATES.WAITING_HUMAN:
-        const nextDay = getNextBusinessDay();
-        const contactTime = nextDay === 'em breve' ? nextDay : `na ${nextDay}`;
-        await client.sendMessage(
-          chatId,
-          `Sua solicitação já foi encaminhada para nossa equipe. Entraremos em contato ${contactTime}. 📞`
-        );
+        await this.handleWaitingHuman(client, message, chatId);
         break;
 
       default:
@@ -207,6 +202,35 @@ class MessageRouter {
       default:
         await client.sendMessage(chatId, messages.errors.invalidOption());
         await client.sendMessage(chatId, messages.mainMenu());
+    }
+  }
+
+  /**
+   * Gerencia estado de aguardando atendimento humano
+   */
+  static async handleWaitingHuman(client, message, chatId) {
+    const option = message.body.trim();
+    const nextDay = getNextBusinessDay();
+    const contactTime = nextDay === 'em breve' ? nextDay : `na ${nextDay}`;
+
+    if (option === '1') {
+      // Mostra o pedido atual
+      const allData = ConversationContext.getAllData(chatId);
+      const summary = messages.helpers.confirmationSummary(allData);
+
+      // Remove as opções de confirmação do resumo e mostra apenas os dados
+      const summaryWithoutOptions = summary.split('\nDigite o número')[0];
+
+      await client.sendMessage(chatId, summaryWithoutOptions);
+      await client.sendMessage(chatId, messages.confirmations.waitingHumanOptions(contactTime));
+    } else if (option === '2') {
+      // Limpa dados e volta ao menu principal
+      ConversationContext.clearData(chatId);
+      ConversationContext.setState(chatId, CONVERSATION_STATES.MAIN_MENU);
+      await client.sendMessage(chatId, messages.mainMenu());
+    } else {
+      // Opção inválida, mostra as opções novamente
+      await client.sendMessage(chatId, messages.confirmations.waitingHumanOptions(contactTime));
     }
   }
 }
